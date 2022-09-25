@@ -30,32 +30,62 @@ public class InvitationController {
     }
 
     @PostMapping("/events")
-    public Event createEvent(@RequestBody EventDto eventDto){
-        return invitationService.createEventAndAddOwner(eventDto);
+    public ResponseEntity createEvent(@RequestBody EventDto eventDto){
+        try{
+            return ResponseEntity.status(HttpStatus.OK).body(invitationService.createEventAndAddOwner(eventDto));
+        }
+        catch (Exception exception){
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).body(exception.getMessage());
+        }
     }
 
     @GetMapping("/invitations")
-    public List<Invitation> getInvitations(){
-        return invitationService.getAll();
+    public ResponseEntity getInvitations(){
+        try{
+            return ResponseEntity.status(HttpStatus.OK).body(invitationService.getAll());
+        }
+        catch (Exception exception){
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).body(exception.getMessage());
+        }
     }
 
     @GetMapping("/invitations/{id}")
-    public Invitation getInvitationsById(@PathVariable("id") Long id){
-        return invitationService.getById(id);
+    public ResponseEntity getInvitationsById(@PathVariable("id") Long id){
+        try{
+            return ResponseEntity.status(HttpStatus.OK).body(invitationService.getById(id));
+        }
+        catch (Exception exception){
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).body(exception.getMessage());
+        }
     }
 
     @GetMapping("/user/{id}/invitations")
-    public List<Invitation> getInvitationsByUser(@PathVariable("id") Long id){
-        return invitationService.getByUserId(id);
+    public ResponseEntity getInvitationsByUser(@PathVariable("id") Long id){
+        try{
+            return ResponseEntity.status(HttpStatus.OK).body(invitationService.getByUserId(id));
+        }
+        catch (Exception exception){
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).body(exception.getMessage());
+        }
     }
 
     @GetMapping("/event/{id}/invitations")
-    public List<Invitation> getInvitationsByEvent(@PathVariable("id") Long id){
-        return invitationService.getByEventId(id);
+    public ResponseEntity getInvitationsByEvent(@PathVariable("id") Long id){
+        try{
+            return ResponseEntity.status(HttpStatus.OK).body(invitationService.getByEventId(id));
+        }
+        catch (Exception exception){
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).body(exception.getMessage());
+        }
     }
 
     @PostMapping("/invitations/{id}")
-    public Invitation setStatus(@PathVariable("id") Long id, @PathParam("status") String status){
-        return invitationService.setStatus(id, status);
+    public ResponseEntity setStatus(@PathVariable("id") Long id, @PathParam("status") String status){
+        try{
+            return ResponseEntity.status(HttpStatus.OK).body(invitationService.setStatus(id, status));
+        }
+        catch (Exception exception){
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).body(exception.getMessage());
+        }
     }
 }
