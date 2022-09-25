@@ -9,7 +9,6 @@ import lombok.Setter;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -19,32 +18,23 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
-@Entity
-@Table(name = "users")
 @Builder(toBuilder = true)
-@NoArgsConstructor
+@Entity
+@Table(name = "events")
 @AllArgsConstructor
 @Getter
 @Setter
-public class User {
+@NoArgsConstructor
+public class Event {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "email")
-    private String email;
-
-    @Column(name = "password")
-    private String password;
-
-    @Column(name = "token")
-    private String token;
-
-    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
-    private Set<Authority> authorities;
+    @Column
+    private String name;
 
     @OneToMany(
-            mappedBy = "user",
+            mappedBy = "event",
             cascade = CascadeType.ALL,
             orphanRemoval = true
     )
@@ -54,23 +44,20 @@ public class User {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        User user = (User) o;
-        return Objects.equals(id, user.id) && Objects.equals(email, user.email) && Objects.equals(password, user.password) && Objects.equals(token, user.token) && Objects.equals(authorities, user.authorities) && Objects.equals(invitations, user.invitations);
+        Event event = (Event) o;
+        return Objects.equals(id, event.id) && Objects.equals(name, event.name) && Objects.equals(invitations, event.invitations);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, email, password, token, authorities, invitations);
+        return Objects.hash(id, name, invitations);
     }
 
     @Override
     public String toString() {
-        return "User{" +
+        return "Event{" +
                 "id=" + id +
-                ", email='" + email + '\'' +
-                ", password='" + password + '\'' +
-                ", token='" + token + '\'' +
-                ", authorities=" + authorities +
+                ", name='" + name + '\'' +
                 ", invitations=" + invitations +
                 '}';
     }

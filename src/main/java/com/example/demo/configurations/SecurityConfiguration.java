@@ -1,4 +1,5 @@
 package com.example.demo.configurations;
+
 import com.example.demo.repositories.UserRepository;
 import com.example.demo.services.CustomUserDetailsService;
 import lombok.AllArgsConstructor;
@@ -14,8 +15,8 @@ import org.springframework.security.web.SecurityFilterChain;
 //$2a$10$gWDVhrA7Ua2KC6CgFRNZ0OaXIuVBcAUXhOhKlWj9pijoZrbLljyrC
 @Configuration
 @AllArgsConstructor
-public class SecurityConfiguration
-{
+public class SecurityConfiguration {
+
     private UserRepository userRepository;
 
     @Bean

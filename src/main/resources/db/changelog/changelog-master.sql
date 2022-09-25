@@ -14,3 +14,19 @@ create table authorities (
 
 ALTER TABLE authorities
 ADD FOREIGN KEY (user_id) REFERENCES users(id);
+
+create table events(
+    id int primary key generated always as identity,
+    name varchar(50) not null
+);
+
+create table invitations(
+    id int primary key generated always as identity,
+    user_id int,
+    event_id int,
+    status int
+);
+ALTER TABLE invitations
+ADD FOREIGN KEY (user_id) REFERENCES users(id);
+ALTER TABLE invitations
+ADD FOREIGN KEY (event_id) REFERENCES events(id);
