@@ -1,6 +1,7 @@
 package com.example.demo.services.impl;
 
 import com.example.demo.dtos.EventDto;
+import com.example.demo.dtos.UserDto;
 import com.example.demo.mappers.EventMapper;
 import com.example.demo.mappers.UserMapper;
 import com.example.demo.models.Event;
@@ -23,8 +24,10 @@ public class EventServiceImpl implements EventService {
 
     @Override
     public Event create(EventDto eventDto) {
-        eventDto.setOwner(UserMapper.mapUserToUserDto(userService.getByEmail(userService.login())));
-        return eventRepository.save(EventMapper.mapEventDtoToEvent(eventDto));
+        UserDto owner = UserMapper.mapUserToUserDto(userService.getByEmail(userService.login()));
+        eventDto.setOwner(owner);
+        Event save = eventRepository.save(EventMapper.mapEventDtoToEvent(eventDto));
+        return save;
     }
 
     @Override

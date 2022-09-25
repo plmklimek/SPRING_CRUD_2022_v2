@@ -1,20 +1,23 @@
 package com.example.demo.services;
 
-import com.example.demo.dtos.InvitationDto;
+import com.example.demo.dtos.EventDto;
+import com.example.demo.models.Event;
 import com.example.demo.models.Invitation;
 
-import java.util.Set;
+import java.util.List;
 
 public interface InvitationService {
-    Invitation create(InvitationDto invitationDto);
+    Event createEventAndAddOwner(EventDto eventDto);
 
-    Set<Invitation> getAll();
+    Invitation create(Long userId, Long eventId, boolean isOwner);
+
+    List<Invitation> getAll();
 
     Invitation getById(Long id);
 
-    Set<Invitation> getByUserId(Long userId);
+    List<Invitation> getByUserId(Long userId);
 
-    Set<Invitation> getByEventId(Long eventId);
+    List<Invitation> getByEventId(Long eventId);
 
     Invitation setStatus(Long id, String status);
 }

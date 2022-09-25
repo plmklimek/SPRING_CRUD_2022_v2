@@ -2,6 +2,7 @@ package com.example.demo.mappers;
 
 import com.example.demo.dtos.EventDto;
 import com.example.demo.models.Event;
+
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -15,7 +16,7 @@ public class EventMapper {
                 .id(eventDto.getId())
                 .name(eventDto.getName())
                 .invitations(InvitationMapper.mapInvitationsDtoToInvitations(eventDto.getInvitations()))
-                .owner(UserMapper.mapUserDtoToUser(eventDto.getOwner()))
+                .owner(UserMapper.mapUserDtoToUserWithoutRelations(eventDto.getOwner()))
                 .build();
     }
 
@@ -28,7 +29,7 @@ public class EventMapper {
                 .id(event.getId())
                 .name(event.getName())
                 .invitations(InvitationMapper.mapInvitationsToInvitationsDto(event.getInvitations()))
-                .owner(UserMapper.mapUserToUserDto(event.getOwner()))
+                .owner(UserMapper.mapUserToUserDtoWithoutRelations(event.getOwner()))
                 .build();
     }
 

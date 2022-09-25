@@ -5,7 +5,7 @@ import com.example.demo.models.Event;
 
 import java.util.Set;
 
-public interface EventService {
+public interface EventService{
     Event create(EventDto eventDto);
 
     Set<Event> getAll();

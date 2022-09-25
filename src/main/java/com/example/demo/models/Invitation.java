@@ -1,5 +1,6 @@
 package com.example.demo.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -11,8 +12,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.MapsId;
 import javax.persistence.Table;
 import java.util.Objects;
 
@@ -29,11 +30,13 @@ public class Invitation {
     private Long id;
 
     @ManyToOne
-    @MapsId("event_id")
+    @JoinColumn(name = "event_id")
+    @JsonIgnoreProperties({"invitations", "events"})
     private Event event;
 
     @ManyToOne
-    @MapsId("user_id")
+    @JoinColumn(name = "user_id")
+    @JsonIgnoreProperties({"invitations", "events"})
     private User user;
 
     @Column

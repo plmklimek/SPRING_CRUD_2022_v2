@@ -1,6 +1,5 @@
 package com.example.demo.dtos;
 
-import com.example.demo.models.User;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -30,12 +29,12 @@ public class EventDto {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         EventDto eventDto = (EventDto) o;
-        return Objects.equals(id, eventDto.id) && Objects.equals(name, eventDto.name) && Objects.equals(invitations, eventDto.invitations);
+        return Objects.equals(id, eventDto.id) && Objects.equals(name, eventDto.name) && Objects.equals(invitations, eventDto.invitations) && Objects.equals(owner, eventDto.owner);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, invitations);
+        return Objects.hash(id, name, invitations, owner);
     }
 
     @Override
@@ -44,6 +43,7 @@ public class EventDto {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", invitations=" + invitations +
+                ", owner=" + owner +
                 '}';
     }
 }

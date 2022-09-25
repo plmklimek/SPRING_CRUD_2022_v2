@@ -1,12 +1,12 @@
 package com.example.demo.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -44,17 +44,15 @@ public class User {
     private Set<Authority> authorities;
 
     @OneToMany(
-            mappedBy = "user",
-            cascade = CascadeType.ALL,
-            orphanRemoval = true
+            mappedBy = "user"
     )
+    @JsonIgnoreProperties({"invitation", "event"})
     private Set<Invitation> invitations = new HashSet<>();
 
     @OneToMany(
-            mappedBy = "owner",
-            cascade = CascadeType.ALL,
-            orphanRemoval = true
+            mappedBy = "owner"
     )
+    @JsonIgnoreProperties({"owner", "invitations", "event"})
     private Set<Event> events = new HashSet<>();
 
     @Override

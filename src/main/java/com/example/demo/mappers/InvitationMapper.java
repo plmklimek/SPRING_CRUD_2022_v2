@@ -33,6 +33,8 @@ public class InvitationMapper {
                 .build();
     }
 
+
+
     public static Set<InvitationDto> mapInvitationsToInvitationsDto(Set<Invitation> invitations) {
         return invitations.stream().map(InvitationMapper::mapInvitationToInvitationDto).collect(Collectors.toSet());
     }

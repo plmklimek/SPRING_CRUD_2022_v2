@@ -1,7 +1,6 @@
 package com.example.demo.dtos;
 
 import com.example.demo.models.Authority;
-import com.example.demo.models.Event;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;

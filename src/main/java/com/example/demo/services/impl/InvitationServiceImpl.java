@@ -1,16 +1,18 @@
 package com.example.demo.services.impl;
 
-import com.example.demo.dtos.InvitationDto;
-import com.example.demo.mappers.InvitationMapper;
+import com.example.demo.dtos.EventDto;
+import com.example.demo.dtos.UserDto;
+import com.example.demo.mappers.UserMapper;
+import com.example.demo.models.Event;
 import com.example.demo.models.Invitation;
 import com.example.demo.models.StatusInvitation;
+import com.example.demo.models.User;
 import com.example.demo.repositories.InvitationRepository;
 import com.example.demo.services.InvitationService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
 import java.util.stream.Collectors;
 
 @AllArgsConstructor
@@ -20,14 +22,41 @@ public class InvitationServiceImpl implements InvitationService {
 
     private final InvitationRepository invitationRepository;
 
+    private final UserServiceImpl userService;
+
+    private final EventServiceImpl eventService;
+
     @Override
-    public Invitation create(InvitationDto invitationDto) {
-        return invitationRepository.save(InvitationMapper.mapInvitationDtoToInvitation(invitationDto));
+    public Event createEventAndAddOwner(EventDto eventDto) {
+        UserDto owner = UserMapper.mapUserToUserDto(userService.getByEmail(userService.login()));
+        eventDto.setOwner(owner);
+        Event save = eventService.create(eventDto);
+        create(owner.getId(), save.getId(), true);
+        return save;
     }
 
     @Override
-    public Set<Invitation> getAll() {
-        return new HashSet<>(invitationRepository.findAll());
+    public Invitation create(Long userId, Long eventId, boolean isOwner) {
+        User userById = userService.getById(userId);
+        Event eventById = eventService.getById(eventId);
+        StatusInvitation statusInvitation;
+        if(isOwner){
+            statusInvitation = StatusInvitation.ACCEPTED;
+        }
+        else{
+            statusInvitation = StatusInvitation.PENDING;
+        }
+        Invitation invitation = Invitation.builder()
+                .user(userById)
+                .event(eventById)
+                .status(statusInvitation)
+                .build();
+        return invitationRepository.save(invitation);
+    }
+
+    @Override
+    public List<Invitation> getAll() {
+        return invitationRepository.findAll();
     }
 
     @Override
@@ -36,13 +65,13 @@ public class InvitationServiceImpl implements InvitationService {
     }
 
     @Override
-    public Set<Invitation> getByUserId(Long userId) {
-        return getAll().stream().filter(invitation -> userId.equals(invitation.getUser().getId())).collect(Collectors.toSet());
+    public List<Invitation> getByUserId(Long userId) {
+        return getAll().stream().filter(invitation -> userId.equals(invitation.getUser().getId())).collect(Collectors.toList());
     }
 
     @Override
-    public Set<Invitation> getByEventId(Long eventId) {
-        return getAll().stream().filter(invitation -> eventId.equals(invitation.getEvent().getId())).collect(Collectors.toSet());
+    public List<Invitation> getByEventId(Long eventId) {
+        return getAll().stream().filter(invitation -> eventId.equals(invitation.getEvent().getId())).collect(Collectors.toList());
     }
 
     @Override
