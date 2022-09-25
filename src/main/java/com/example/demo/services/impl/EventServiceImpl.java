@@ -16,7 +16,7 @@ import java.util.Set;
 @Service
 @AllArgsConstructor
 public class EventServiceImpl implements EventService {
-    private final static String USER_DOESNT_EXIST = "USER DOESNT EXIST";
+    private final static String EVENT_DOESNT_EXIST = "EVENT DOESNT EXIST";
 
     private final EventRepository eventRepository;
 
@@ -37,6 +37,6 @@ public class EventServiceImpl implements EventService {
 
     @Override
     public Event getById(Long id) {
-        return eventRepository.findById(id).orElseThrow(() -> new IllegalArgumentException(USER_DOESNT_EXIST));
+        return eventRepository.findById(id).orElseThrow(() -> new IllegalArgumentException(EVENT_DOESNT_EXIST));
     }
 }

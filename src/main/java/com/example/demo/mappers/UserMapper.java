@@ -3,6 +3,8 @@ package com.example.demo.mappers;
 import com.example.demo.dtos.UserDto;
 import com.example.demo.models.User;
 
+import java.util.Set;
+
 public class UserMapper {
     public static User mapUserDtoToUser(UserDto userDto) {
         if(userDto == null){
@@ -57,6 +59,7 @@ public class UserMapper {
                 .email(user.getEmail())
                 .password(user.getPassword())
                 .authorities(user.getAuthorities())
+                .invitations(Set.of())
                 .build();
     }
 }

@@ -1,8 +1,6 @@
 package com.example.demo.controllers;
 
 import com.example.demo.dtos.EventDto;
-import com.example.demo.models.Event;
-import com.example.demo.models.Invitation;
 import com.example.demo.services.impl.InvitationServiceImpl;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -14,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.websocket.server.PathParam;
-import java.util.List;
 import java.util.Map;
 
 @AllArgsConstructor
