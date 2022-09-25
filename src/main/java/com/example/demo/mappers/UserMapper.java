@@ -15,6 +15,7 @@ public class UserMapper {
                 .password(userDto.getPassword())
                 .authorities(userDto.getAuthorities())
                 .invitations(InvitationMapper.mapInvitationsDtoToInvitations(userDto.getInvitations()))
+                .events(EventMapper.mapEventsDtoToEvents(userDto.getEvents()))
                 .build();
     }
 
@@ -29,6 +30,7 @@ public class UserMapper {
                 .password(user.getPassword())
                 .authorities(user.getAuthorities())
                 .invitations(InvitationMapper.mapInvitationsToInvitationsDto(user.getInvitations()))
+                .events(EventMapper.mapEventsToEventsDto(user.getEvents()))
                 .build();
     }
 

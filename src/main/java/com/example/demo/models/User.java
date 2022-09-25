@@ -50,6 +50,13 @@ public class User {
     )
     private Set<Invitation> invitations = new HashSet<>();
 
+    @OneToMany(
+            mappedBy = "owner",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
+    )
+    private Set<Event> events = new HashSet<>();
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

@@ -13,4 +13,7 @@ public interface UserService {
     Set<User> getAll();
 
     User getById(Long id);
+
+    User getByEmail(String email);
+
 }

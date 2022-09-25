@@ -1,5 +1,6 @@
 package com.example.demo.dtos;
 
+import com.example.demo.models.User;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -21,6 +22,8 @@ public class EventDto {
     private String name;
 
     private Set<InvitationDto> invitations = new HashSet<>();
+
+    private UserDto owner;
 
     @Override
     public boolean equals(Object o) {

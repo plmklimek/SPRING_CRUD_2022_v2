@@ -17,7 +17,8 @@ ADD FOREIGN KEY (user_id) REFERENCES users(id);
 
 create table events(
     id int primary key generated always as identity,
-    name varchar(50) not null
+    name varchar(50) not null,
+    user_id int
 );
 
 create table invitations(
@@ -30,3 +31,5 @@ ALTER TABLE invitations
 ADD FOREIGN KEY (user_id) REFERENCES users(id);
 ALTER TABLE invitations
 ADD FOREIGN KEY (event_id) REFERENCES events(id);
+ALTER TABLE events
+ADD FOREIGN KEY (user_id) REFERENCES users(id);

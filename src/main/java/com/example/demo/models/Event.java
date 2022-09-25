@@ -12,6 +12,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.MapsId;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import java.util.HashSet;
@@ -40,17 +43,21 @@ public class Event {
     )
     private Set<Invitation> invitations = new HashSet<>();
 
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User owner;
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Event event = (Event) o;
-        return Objects.equals(id, event.id) && Objects.equals(name, event.name) && Objects.equals(invitations, event.invitations);
+        return Objects.equals(id, event.id) && Objects.equals(name, event.name) && Objects.equals(invitations, event.invitations) && Objects.equals(owner, event.owner);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, invitations);
+        return Objects.hash(id, name, invitations, owner);
     }
 
     @Override
@@ -59,6 +66,7 @@ public class Event {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", invitations=" + invitations +
+                ", owner=" + owner +
                 '}';
     }
 }

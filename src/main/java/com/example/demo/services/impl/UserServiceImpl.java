@@ -54,6 +54,11 @@ public class UserServiceImpl implements UserService {
         return userRepository.findById(id).orElseThrow(() -> new IllegalArgumentException(USER_DOESNT_EXIST));
     }
 
+    @Override
+    public User getByEmail(String email) {
+        return userRepository.findByEmail(email);
+    }
+
     private PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
