@@ -13,6 +13,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Optional;
 
@@ -37,8 +38,8 @@ public class EventServiceTest {
                 .id(1L)
                 .email("mail@mail.com")
                 .password("test")
-                .invitations(new HashSet<>())
-                .events(new HashSet<>())
+                .invitations(new ArrayList<>())
+                .events(new ArrayList<>())
                 .build();
     }
 
@@ -55,7 +56,7 @@ public class EventServiceTest {
                 .id(1L)
                 .name("test")
                 .owner(getUser())
-                .invitations(new HashSet<>())
+                .invitations(new ArrayList<>())
                 .build();
     }
 

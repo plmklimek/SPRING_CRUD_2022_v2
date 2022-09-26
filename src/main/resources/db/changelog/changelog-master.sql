@@ -33,3 +33,15 @@ ALTER TABLE invitations
 ADD FOREIGN KEY (event_id) REFERENCES events(id);
 ALTER TABLE events
 ADD FOREIGN KEY (user_id) REFERENCES users(id);
+
+
+INSERT INTO users (email,"password","token") VALUES
+	 ('mail2@mail.com','$2a$10$wACHo4hWYG/3.RQlaZB9S.410ImC91bWT6cVwGUOJWrmdlJVd0SdC',NULL),
+	 ('mail3@mail.com','$2a$10$wACHo4hWYG/3.RQlaZB9S.410ImC91bWT6cVwGUOJWrmdlJVd0SdC',NULL);
+INSERT INTO authorities (user_id,authority) VALUES
+	 (1,'USER');
+INSERT INTO events (name,user_id) VALUES
+	 ('SUPER',1),
+	 ('SUPER',1);
+INSERT INTO invitations (user_id,event_id,status) VALUES
+     (1,2,1);

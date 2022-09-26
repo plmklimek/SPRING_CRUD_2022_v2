@@ -7,7 +7,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
@@ -27,9 +29,9 @@ public class UserDto {
 
     private Set<Authority> authorities;
 
-    private Set<InvitationDto> invitations = new HashSet<>();
+    private List<InvitationDto> invitations = new ArrayList<>();
 
-    private Set<EventDto> events = new HashSet<>();
+    private List<EventDto> events = new ArrayList<>();
 
     @Override
     public boolean equals(Object o) {

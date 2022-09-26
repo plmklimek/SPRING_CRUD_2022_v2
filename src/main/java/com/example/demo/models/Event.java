@@ -16,7 +16,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
@@ -39,7 +41,7 @@ public class Event {
             mappedBy = "event"
     )
     @JsonIgnoreProperties({"invitations"})
-    private Set<Invitation> invitations = new HashSet<>();
+    private List<Invitation> invitations = new ArrayList<>();
 
     @ManyToOne
     @JoinColumn(name = "user_id")

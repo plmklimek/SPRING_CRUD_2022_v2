@@ -6,7 +6,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
@@ -20,7 +22,7 @@ public class EventDto {
 
     private String name;
 
-    private Set<InvitationDto> invitations = new HashSet<>();
+    private List<InvitationDto> invitations = new ArrayList<>();
 
     private UserDto owner;
 

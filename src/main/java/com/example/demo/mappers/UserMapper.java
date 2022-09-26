@@ -3,6 +3,7 @@ package com.example.demo.mappers;
 import com.example.demo.dtos.UserDto;
 import com.example.demo.models.User;
 
+import java.util.List;
 import java.util.Set;
 
 public class UserMapper {
@@ -59,7 +60,7 @@ public class UserMapper {
                 .email(user.getEmail())
                 .password(user.getPassword())
                 .authorities(user.getAuthorities())
-                .invitations(Set.of())
+                .invitations(List.of())
                 .build();
     }
 }

@@ -15,7 +15,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
@@ -47,13 +49,13 @@ public class User {
             mappedBy = "user"
     )
     @JsonIgnoreProperties({"invitation", "event"})
-    private Set<Invitation> invitations = new HashSet<>();
+    private List<Invitation> invitations = new ArrayList<>();
 
     @OneToMany(
             mappedBy = "owner"
     )
     @JsonIgnoreProperties({"owner", "invitations", "event"})
-    private Set<Event> events = new HashSet<>();
+    private List<Event> events = new ArrayList<>();
 
     @Override
     public boolean equals(Object o) {

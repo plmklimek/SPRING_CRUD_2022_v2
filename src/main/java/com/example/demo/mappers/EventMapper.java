@@ -3,6 +3,7 @@ package com.example.demo.mappers;
 import com.example.demo.dtos.EventDto;
 import com.example.demo.models.Event;
 
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -57,11 +58,11 @@ public class EventMapper {
                 .build();
     }
 
-    public static Set<EventDto> mapEventsToEventsDto(Set<Event> events) {
-        return events.stream().map(EventMapper::mapEventToEventDto).collect(Collectors.toSet());
+    public static List<EventDto> mapEventsToEventsDto(List<Event> events) {
+        return events.stream().map(EventMapper::mapEventToEventDto).collect(Collectors.toList());
     }
 
-    public static Set<Event> mapEventsDtoToEvents(Set<EventDto> eventDtos) {
-        return eventDtos.stream().map(EventMapper::mapEventDtoToEvent).collect(Collectors.toSet());
+    public static List<Event> mapEventsDtoToEvents(List<EventDto> eventDtos) {
+        return eventDtos.stream().map(EventMapper::mapEventDtoToEvent).collect(Collectors.toList());
     }
 }

@@ -10,8 +10,7 @@ import com.example.demo.services.EventService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
 
 @Service
 @AllArgsConstructor
@@ -31,8 +30,8 @@ public class EventServiceImpl implements EventService {
     }
 
     @Override
-    public Set<Event> getAll() {
-        return new HashSet<>(eventRepository.findAll());
+    public List<Event> getAll() {
+        return eventRepository.findAll();
     }
 
     @Override

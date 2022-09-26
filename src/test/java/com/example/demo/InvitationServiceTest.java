@@ -17,7 +17,9 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
@@ -49,8 +51,8 @@ public class InvitationServiceTest {
                 .id(1L)
                 .email("mail@mail.com")
                 .password("test")
-                .invitations(new HashSet<>())
-                .events(new HashSet<>())
+                .invitations(new ArrayList<>())
+                .events(new ArrayList<>())
                 .build();
     }
 
@@ -67,7 +69,7 @@ public class InvitationServiceTest {
                 .id(1L)
                 .name("test")
                 .owner(getUser())
-                .invitations(new HashSet<>())
+                .invitations(new ArrayList<>())
                 .build();
     }
 
@@ -116,7 +118,7 @@ public class InvitationServiceTest {
         doReturn(getUser().getEmail()).when(userService).login();
         doReturn(getUser()).when(userService).getByEmail(anyString());
         User user = getUser();
-        user.setEvents(Set.of(getEvent()));
+        user.setEvents(List.of(getEvent()));
         getEvent().setOwner(user);
         doReturn(getEvent()).when(eventService).create(EventMapper.mapEventToEventDto(getEvent()));
 
@@ -130,7 +132,7 @@ public class InvitationServiceTest {
         doReturn(getUser()).when(userService).getById(1L);
         doReturn(getEvent()).when(eventService).getById(1L);
         User user = getUser();
-        user.setEvents(Set.of(getEvent()));
+        user.setEvents(List.of(getEvent()));
         getEvent().setOwner(user);
 
         assertDoesNotThrow(() -> {
