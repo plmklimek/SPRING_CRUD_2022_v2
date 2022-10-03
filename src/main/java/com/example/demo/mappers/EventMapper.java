@@ -54,7 +54,7 @@ public class EventMapper {
         return EventDto.builder()
                 .id(event.getId())
                 .name(event.getName())
-                .owner(UserMapper.mapUserToUserDto(event.getOwner()))
+                .owner(UserMapper.mapUserToUserDtoWithoutRelations(event.getOwner()))
                 .build();
     }
 

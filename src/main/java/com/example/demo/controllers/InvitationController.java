@@ -5,6 +5,7 @@ import com.example.demo.services.impl.InvitationServiceImpl;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -12,17 +13,21 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.websocket.server.PathParam;
+import java.util.HashMap;
 import java.util.Map;
 
 @AllArgsConstructor
 @RestController
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class InvitationController {
     private final InvitationServiceImpl invitationService;
 
     @PostMapping("/invitations")
-    public ResponseEntity<String> create(@RequestBody Map<String, Long> json){
+    public ResponseEntity create(@RequestBody Map<String, Long> json){
+        Map<String, String> status = new HashMap<>();
+        status.put("status", "Invitation added id:" + invitationService.create(json.get("user_id"), json.get("event_id"), false).getId());
         return new ResponseEntity<>(
-                "Invitation added id:" + invitationService.create(json.get("user_id"), json.get("event_id"), false).getId(),
+                status,
                 HttpStatus.OK);
     }
 
