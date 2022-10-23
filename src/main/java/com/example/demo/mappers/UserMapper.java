@@ -4,7 +4,6 @@ import com.example.demo.dtos.UserDto;
 import com.example.demo.models.User;
 
 import java.util.List;
-import java.util.Set;
 
 public class UserMapper {
     public static User mapUserDtoToUser(UserDto userDto) {

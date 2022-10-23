@@ -25,10 +25,18 @@ public class InvitationController {
     @PostMapping("/invitations")
     public ResponseEntity create(@RequestBody Map<String, Long> json){
         Map<String, String> status = new HashMap<>();
-        status.put("status", "Invitation added id:" + invitationService.create(json.get("user_id"), json.get("event_id"), false).getId());
-        return new ResponseEntity<>(
-                status,
-                HttpStatus.OK);
+        try{
+            status.put("status", "Invitation added id:" + invitationService.create(json.get("user_id"), json.get("event_id"), false).getId());
+            return new ResponseEntity<>(
+                    status,
+                    HttpStatus.OK);
+        }
+        catch (Exception exception){
+            status.put("status", exception.getMessage());
+            return new ResponseEntity<>(
+                    status,
+                    HttpStatus.OK);
+        }
     }
 
     @PostMapping("/events")

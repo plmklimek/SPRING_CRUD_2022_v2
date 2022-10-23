@@ -1,6 +1,7 @@
 package com.example.demo.controllers;
 
 import com.example.demo.dtos.UserDto;
+import com.example.demo.services.impl.EventServiceImpl;
 import com.example.demo.services.impl.UserServiceImpl;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -19,6 +20,8 @@ import java.util.HashMap;
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 public class UserController {
     private final UserServiceImpl userService;
+
+    private final EventServiceImpl eventService;
 
     @GetMapping("/user/{id}")
     public ResponseEntity login(@PathVariable("id") Long id) {
@@ -56,6 +59,16 @@ public class UserController {
             HashMap<String, String> map = new HashMap<>();
             map.put("mail", userService.login());
             return ResponseEntity.status(HttpStatus.OK).body(map);
+        }
+        catch (Exception exception){
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).body(exception.getMessage());
+        }
+    }
+
+    @GetMapping("/usersAvailable/{id}")
+    public ResponseEntity getUsersAvailableForEvent(@PathVariable("id") Long id) {
+        try{
+            return ResponseEntity.status(HttpStatus.OK).body(eventService.getAvailableForEvent(id));
         }
         catch (Exception exception){
             return ResponseEntity.status(HttpStatus.FORBIDDEN).body(exception.getMessage());

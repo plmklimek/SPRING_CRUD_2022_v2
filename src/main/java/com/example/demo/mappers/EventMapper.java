@@ -4,7 +4,6 @@ import com.example.demo.dtos.EventDto;
 import com.example.demo.models.Event;
 
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 public class EventMapper {
