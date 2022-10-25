@@ -1,6 +1,7 @@
 package com.example.demo.controllers;
 
 import com.example.demo.dtos.UserDto;
+import com.example.demo.mappers.UserMapper;
 import com.example.demo.services.impl.EventServiceImpl;
 import com.example.demo.services.impl.UserServiceImpl;
 import lombok.AllArgsConstructor;
@@ -26,7 +27,7 @@ public class UserController {
     @GetMapping("/user/{id}")
     public ResponseEntity login(@PathVariable("id") Long id) {
         try{
-            return ResponseEntity.status(HttpStatus.OK).body(userService.getById(id));
+            return ResponseEntity.status(HttpStatus.OK).body(UserMapper.mapUserToUserDto(userService.getById(id)));
         }
         catch (Exception exception){
             return ResponseEntity.status(HttpStatus.FORBIDDEN).body(exception.getMessage());
@@ -36,7 +37,7 @@ public class UserController {
     @GetMapping("/users")
     public ResponseEntity getUsers() {
         try{
-            return ResponseEntity.status(HttpStatus.OK).body(userService.getAll());
+            return ResponseEntity.status(HttpStatus.OK).body(UserMapper.mapUsersToUsersDto(userService.getAll()));
         }
         catch (Exception exception){
             return ResponseEntity.status(HttpStatus.FORBIDDEN).body(exception.getMessage());
@@ -68,7 +69,7 @@ public class UserController {
     @GetMapping("/usersAvailable/{id}")
     public ResponseEntity getUsersAvailableForEvent(@PathVariable("id") Long id) {
         try{
-            return ResponseEntity.status(HttpStatus.OK).body(eventService.getAvailableForEvent(id));
+            return ResponseEntity.status(HttpStatus.OK).body(UserMapper.mapUsersToUsersDto(eventService.getAvailableForEvent(id)));
         }
         catch (Exception exception){
             return ResponseEntity.status(HttpStatus.FORBIDDEN).body(exception.getMessage());

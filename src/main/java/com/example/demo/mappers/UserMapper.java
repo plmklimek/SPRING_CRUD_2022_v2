@@ -4,6 +4,8 @@ import com.example.demo.dtos.UserDto;
 import com.example.demo.models.User;
 
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 public class UserMapper {
     public static User mapUserDtoToUser(UserDto userDto) {
@@ -61,5 +63,13 @@ public class UserMapper {
                 .authorities(user.getAuthorities())
                 .invitations(List.of())
                 .build();
+    }
+
+    public static Set<UserDto> mapUsersToUsersDto(Set<User> users) {
+        return users.stream().map(UserMapper::mapUserToUserDto).collect(Collectors.toSet());
+    }
+
+    public static Set<User> mapUsersDtoToUsers(Set<UserDto> userDtos) {
+        return userDtos.stream().map(UserMapper::mapUserDtoToUser).collect(Collectors.toSet());
     }
 }

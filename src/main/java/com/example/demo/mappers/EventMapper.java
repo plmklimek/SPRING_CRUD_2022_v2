@@ -58,10 +58,10 @@ public class EventMapper {
     }
 
     public static List<EventDto> mapEventsToEventsDto(List<Event> events) {
-        return events.stream().map(EventMapper::mapEventToEventDto).collect(Collectors.toList());
+        return events.stream().map(EventMapper::mapEventToEventDtoWithoutRelations).collect(Collectors.toList());
     }
 
     public static List<Event> mapEventsDtoToEvents(List<EventDto> eventDtos) {
-        return eventDtos.stream().map(EventMapper::mapEventDtoToEvent).collect(Collectors.toList());
+        return eventDtos.stream().map(EventMapper::mapEventDtoToEventWithoutRelations).collect(Collectors.toList());
     }
 }

@@ -33,6 +33,27 @@ public class InvitationMapper {
                 .build();
     }
 
+    public static InvitationDto mapInvitationToInvitationDtoWithoutRelation(Invitation invitation) {
+        if(invitation == null){
+            return null;
+        }
+
+        return InvitationDto.builder()
+                .id(invitation.getId())
+                .status(invitation.getStatus())
+                .build();
+    }
+
+    public static Invitation mapInvitationDtoToInvitationWithoutRelation(InvitationDto invitationDto) {
+        if(invitationDto == null){
+            return null;
+        }
+
+        return Invitation.builder()
+                .id(invitationDto.getId())
+                .status(invitationDto.getStatus())
+                .build();
+    }
 
 
     public static List<InvitationDto> mapInvitationsToInvitationsDto(List<Invitation> invitations) {

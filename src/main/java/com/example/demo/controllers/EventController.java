@@ -1,5 +1,6 @@
 package com.example.demo.controllers;
 
+import com.example.demo.mappers.EventMapper;
 import com.example.demo.services.impl.EventServiceImpl;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -18,7 +19,7 @@ public class EventController {
     @GetMapping("/events")
     public ResponseEntity getEvents(){
         try{
-            return ResponseEntity.status(HttpStatus.OK).body(eventService.getAll());
+            return ResponseEntity.status(HttpStatus.OK).body(EventMapper.mapEventsToEventsDto(eventService.getAll()));
         }
         catch (Exception exception){
             return ResponseEntity.status(HttpStatus.FORBIDDEN).body(exception.getMessage());
@@ -28,7 +29,7 @@ public class EventController {
     @GetMapping("/events/{id}")
     public ResponseEntity getEvent(@PathVariable("id") Long id){
         try{
-            return ResponseEntity.status(HttpStatus.OK).body(eventService.getById(id));
+            return ResponseEntity.status(HttpStatus.OK).body(EventMapper.mapEventToEventDto(eventService.getById(id)));
         }
         catch (Exception exception){
             return ResponseEntity.status(HttpStatus.FORBIDDEN).body(exception.getMessage());

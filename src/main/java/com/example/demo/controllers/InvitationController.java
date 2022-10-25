@@ -1,6 +1,7 @@
 package com.example.demo.controllers;
 
 import com.example.demo.dtos.EventDto;
+import com.example.demo.mappers.InvitationMapper;
 import com.example.demo.services.impl.InvitationServiceImpl;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -52,7 +53,7 @@ public class InvitationController {
     @GetMapping("/invitations")
     public ResponseEntity getInvitations(){
         try{
-            return ResponseEntity.status(HttpStatus.OK).body(invitationService.getAll());
+            return ResponseEntity.status(HttpStatus.OK).body(InvitationMapper.mapInvitationsToInvitationsDto(invitationService.getAll()));
         }
         catch (Exception exception){
             return ResponseEntity.status(HttpStatus.FORBIDDEN).body(exception.getMessage());
@@ -62,7 +63,7 @@ public class InvitationController {
     @GetMapping("/invitations/{id}")
     public ResponseEntity getInvitationsById(@PathVariable("id") Long id){
         try{
-            return ResponseEntity.status(HttpStatus.OK).body(invitationService.getById(id));
+            return ResponseEntity.status(HttpStatus.OK).body(InvitationMapper.mapInvitationToInvitationDto(invitationService.getById(id)));
         }
         catch (Exception exception){
             return ResponseEntity.status(HttpStatus.FORBIDDEN).body(exception.getMessage());
@@ -72,7 +73,7 @@ public class InvitationController {
     @GetMapping("/user/{id}/invitations")
     public ResponseEntity getInvitationsByUser(@PathVariable("id") Long id){
         try{
-            return ResponseEntity.status(HttpStatus.OK).body(invitationService.getByUserId(id));
+            return ResponseEntity.status(HttpStatus.OK).body(InvitationMapper.mapInvitationsToInvitationsDto(invitationService.getByUserId(id)));
         }
         catch (Exception exception){
             return ResponseEntity.status(HttpStatus.FORBIDDEN).body(exception.getMessage());
@@ -82,7 +83,7 @@ public class InvitationController {
     @GetMapping("/event/{id}/invitations")
     public ResponseEntity getInvitationsByEvent(@PathVariable("id") Long id){
         try{
-            return ResponseEntity.status(HttpStatus.OK).body(invitationService.getByEventId(id));
+            return ResponseEntity.status(HttpStatus.OK).body(InvitationMapper.mapInvitationsToInvitationsDto(invitationService.getByEventId(id)));
         }
         catch (Exception exception){
             return ResponseEntity.status(HttpStatus.FORBIDDEN).body(exception.getMessage());
