@@ -1,6 +1,7 @@
 package com.example.demo.dtos;
 
 import com.example.demo.models.Authority;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -28,8 +29,10 @@ public class UserDto {
 
     private Set<Authority> authorities;
 
+    @JsonManagedReference("invitation")
     private List<InvitationDto> invitations = new ArrayList<>();
 
+    @JsonManagedReference("event")
     private List<EventDto> events = new ArrayList<>();
 
     @Override
@@ -37,12 +40,12 @@ public class UserDto {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         UserDto userDto = (UserDto) o;
-        return Objects.equals(id, userDto.id) && Objects.equals(email, userDto.email) && Objects.equals(password, userDto.password) && Objects.equals(token, userDto.token) && Objects.equals(authorities, userDto.authorities) && Objects.equals(invitations, userDto.invitations);
+        return Objects.equals(id, userDto.id) && Objects.equals(email, userDto.email) && Objects.equals(password, userDto.password) && Objects.equals(token, userDto.token);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, email, password, token, authorities, invitations);
+        return Objects.hash(id, email, password, token);
     }
 
     @Override

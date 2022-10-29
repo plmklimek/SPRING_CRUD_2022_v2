@@ -1,6 +1,7 @@
 package com.example.demo.dtos;
 
 import com.example.demo.models.StatusInvitation;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -17,8 +18,10 @@ import java.util.Objects;
 public class InvitationDto {
     private Long id;
 
+    @JsonBackReference
     private EventDto event;
 
+    @JsonBackReference("invitation")
     private UserDto user;
 
     private StatusInvitation status;

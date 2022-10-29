@@ -1,5 +1,6 @@
 package com.example.demo.dtos;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -20,8 +21,10 @@ public class EventDto {
 
     private String name;
 
+    @JsonBackReference
     private List<InvitationDto> invitations = new ArrayList<>();
 
+    @JsonBackReference("event")
     private UserDto owner;
 
     @Override
