@@ -3,7 +3,6 @@ package com.example.demo.mappers;
 import com.example.demo.dtos.EventDto;
 import com.example.demo.models.Event;
 import org.modelmapper.ModelMapper;
-import org.modelmapper.TypeMap;
 
 import java.util.List;
 import java.util.stream.Collectors;
