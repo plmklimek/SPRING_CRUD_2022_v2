@@ -4,6 +4,7 @@ import com.example.demo.dtos.UserDto;
 import com.example.demo.mappers.UserMapper;
 import com.example.demo.services.impl.EventServiceImpl;
 import com.example.demo.services.impl.UserServiceImpl;
+import com.example.demo.utills.LoggedUser;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -70,6 +71,17 @@ public class UserController {
     public ResponseEntity getUsersAvailableForEvent(@PathVariable("id") Long id) {
         try{
             return ResponseEntity.status(HttpStatus.OK).body(UserMapper.mapUsersToUsersDto(eventService.getAvailableForEvent(id)));
+        }
+        catch (Exception exception){
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).body(exception.getMessage());
+        }
+    }
+
+    @GetMapping("/me")
+    public ResponseEntity getMe() {
+        try{
+            String loggedUser = LoggedUser.getLoggedUser();
+            return ResponseEntity.status(HttpStatus.OK).body(UserMapper.mapUserToUserDto(userService.getByEmail(loggedUser)));
         }
         catch (Exception exception){
             return ResponseEntity.status(HttpStatus.FORBIDDEN).body(exception.getMessage());

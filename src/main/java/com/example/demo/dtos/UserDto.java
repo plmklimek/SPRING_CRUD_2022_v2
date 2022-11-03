@@ -1,6 +1,7 @@
 package com.example.demo.dtos;
 
 import com.example.demo.models.Authority;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -29,7 +30,7 @@ public class UserDto {
 
     private Set<Authority> authorities;
 
-    @JsonManagedReference("invitation")
+    @JsonBackReference("invitation")
     private List<InvitationDto> invitations = new ArrayList<>();
 
     @JsonManagedReference("event")

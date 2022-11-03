@@ -2,6 +2,7 @@ package com.example.demo.dtos;
 
 import com.example.demo.models.StatusInvitation;
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -21,7 +22,7 @@ public class InvitationDto {
     @JsonBackReference
     private EventDto event;
 
-    @JsonBackReference("invitation")
+    @JsonManagedReference("invitation")
     private UserDto user;
 
     private StatusInvitation status;
